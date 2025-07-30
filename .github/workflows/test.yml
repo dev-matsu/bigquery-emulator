@@ -16,12 +16,12 @@ jobs:
     - name: checkout
       uses: actions/checkout@v4
     - name: setup Go ${{ matrix.go-version }}
-      uses: actions/setup-go@v4
+      uses: actions/setup-go@v5
       with:
         go-version: ${{ matrix.go-version }}
         cache: true
     - name: cache for linux
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       if: runner.os == 'Linux'
       with:
         path: |
@@ -31,7 +31,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-go-
     - name: cache for macOS
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       if: runner.os == 'macOS'
       with:
         path: |
@@ -67,13 +67,13 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
     - name: setup Go ${{ matrix.go-version }}
-      uses: actions/setup-go@v2
+      uses: actions/setup-go@v5
       with:
         go-version: ${{ matrix.go-version }}
     - name: checkout
       uses: actions/checkout@v4
     - name: cache for linux
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       if: runner.os == 'Linux'
       with:
         path: |
@@ -83,7 +83,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-go-
     - name: cache for macOS
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       if: runner.os == 'macOS'
       with:
         path: |

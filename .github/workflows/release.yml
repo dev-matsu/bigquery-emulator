@@ -23,17 +23,17 @@ jobs:
     - name: checkout
       uses: actions/checkout@v4
     - name: setup Go ${{ matrix.go-version }}
-      uses: actions/setup-go@v4
+      uses: actions/setup-go@v5
       with:
         go-version: ${{ matrix.go-version }}
         cache: true
     - name: extract version from tags
       id: meta
       run: |
-        echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+        echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
     - uses: rui314/setup-mold@v1
     - name: cache for linux
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       if: runner.os == 'Linux'
       with:
         path: |
@@ -43,7 +43,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-go-
     - name: cache for macOS
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       if: runner.os == 'macOS'
       with:
         path: |
